@@ -1,0 +1,50 @@
+{
+    "git.autofetch": true,
+    "editor.renderWhitespace": "all",
+    "editor.rulers": [80, 120],
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "terminal.integrated.confirmOnExit": "hasChildProcesses",
+    "terminal.integrated.confirmOnKill": "always",
+    "debug.confirmOnExit": "always",
+    // "python.analysis.typeCheckingMode": "basic",
+    // "filewatcher.commands": [
+    //     {
+    //         "match": "\\.py*",
+    //         "isAsync": false,
+    //         "cmd": "unexpand -t 4 --first-only ${file} > ${file}.tmp",
+    //         "event": "onFileChange"
+    //     },
+    //     {
+    //         "match": "\\.py*",
+    //         "isAsync": false,
+    //         "cmd": "mv ${file}.tmp ${file}",
+    //         "event": "onFileChange"
+    //     }
+    // ],
+    "search.exclude": {
+        "**/archived": true,
+        "**/archived_sites": true,
+        "**/sites/assets": true,
+        "**/env": true,
+        "**/node_modules": true,
+        "**/logs": true,
+        "**/*.po": true,
+    },
+    "prettier.printWidth": 88, // same as black uses for python
+    "prettier.useTabs": true,
+    "[javascript, css]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[python]": {
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.detectIndentation": true,
+        "editor.insertSpaces": false,
+        "editor.formatOnPaste": false,
+        "editor.formatOnSave": false
+    },
+    "files.exclude": {
+        "**/templates/includes/*.js": {
+            "javascript.validate.enable": true
+        }
+    }
+}

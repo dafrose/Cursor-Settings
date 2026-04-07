@@ -1,0 +1,12 @@
+# Ignore everything
+*
+.*
+
+# Except this file
+!.gitignore
+
+# Track .vscode and .cursor
+!.vscode/
+!.vscode/**
+!.cursor/
+!.cursor/**
