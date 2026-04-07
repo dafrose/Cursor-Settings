@@ -1,0 +1,9 @@
+---
+description: Unquoted type hints when using from __future__ import annotations (Ruff UP037)
+globs: "**/*.py"
+alwaysApply: false
+---
+
+With `from __future__ import annotations`, do not quote type hints that can be written normally (Ruff UP037).
+
+Details: read skill **`python-postponed-annotations`**.

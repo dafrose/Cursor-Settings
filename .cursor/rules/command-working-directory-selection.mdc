@@ -1,0 +1,8 @@
+---
+description: Always select and prepend correct cd before commands
+alwaysApply: true
+---
+
+Before shell commands, `cd` to the correct bench root or app repo; ask the user when the target is ambiguous.
+
+Details: read skill **`command-working-directory-selection`**.

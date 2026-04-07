@@ -1,0 +1,8 @@
+---
+description: Structure project plans into independently shippable feature milestones with document → refactor → implement phases. Apply when planning, revising, or breaking down implementation work (plans, project notes, roadmaps, PR scoping).
+alwaysApply: false
+---
+
+Break work into **milestones** (independent features, one PR each) and **phases** (document existing behaviour → refactor reusable parts → implement the new feature).
+
+Details: read vault skill **`zettelkasten/99-system/agent-skills/skill milestone phase planning.md`** (wikilink: `[[skill milestone phase planning]]`).

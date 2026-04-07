@@ -1,0 +1,7 @@
+---
+alwaysApply: true
+---
+
+Do not guard empty values on mandatory (`reqd`) fields in Desk save hooks — Desk blocks save before hooks run.
+
+Details: read skill **`frappe-reqd-fields`**.

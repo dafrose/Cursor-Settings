@@ -1,0 +1,128 @@
+{
+    "version": "0.3.0",
+    "configurations": [
+        {
+            "name": "bench serve",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/apps/frappe/frappe/utils/bench_helper.py",
+            "args": [
+                "frappe", "--site", "${input:site}", "serve", "--port", "8000", "--noreload"
+            ],
+            "python": "${workspaceFolder}/env/bin/python",
+            "cwd": "${workspaceFolder}/sites",
+            "env": {
+                "DEV_SERVER": "1"
+            },
+            "justMyCode": false
+        },
+        {
+            "name": "bench console",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/apps/frappe/frappe/utils/bench_helper.py",
+            "args": [
+                "frappe", "--site", "${input:site}", "console"
+            ],
+            "python": "${workspaceFolder}/env/bin/python",
+            "cwd": "${workspaceFolder}/sites",
+            "env": {
+                "DEV_SERVER": "1"
+            }
+        },
+        {
+            "name": "bench run-tests --module",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/apps/frappe/frappe/utils/bench_helper.py",
+            "args": [
+                "frappe", "--site", "${input:site}", "run-tests", "--module", "${input:test}", "--test", "SPECIFIC_TEST_METHOD_NAME"
+            ],
+            "python": "${workspaceFolder}/env/bin/python",
+            "cwd": "${workspaceFolder}/sites",
+            "env": {
+                "DEV_SERVER": "1"
+            }
+        },
+        {
+            "name": "bench run-patch",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/apps/frappe/frappe/utils/bench_helper.py",
+            "args": [
+                "frappe", "--site", "${input:site}", "run-patch", "${input:patch}"
+            ],
+            "python": "${workspaceFolder}/env/bin/python",
+            "cwd": "${workspaceFolder}/sites",
+            "env": {
+                "DEV_SERVER": "1"
+            }
+        },
+        {
+            "name": "bench migrate",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/apps/frappe/frappe/utils/bench_helper.py",
+            "args": [
+                "frappe", "--site", "${input:site}", "migrate", "--skip-failing"
+            ],
+            "python": "${workspaceFolder}/env/bin/python",
+            "cwd": "${workspaceFolder}/sites",
+            "env": {
+                "DEV_SERVER": "1"
+            }
+        },
+        {
+            "name": "bench install-app",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/apps/frappe/frappe/utils/bench_helper.py",
+            "args": [
+                "frappe", "--site", "${input:site}", "install-app", "${input:app}"
+            ],
+            "python": "${workspaceFolder}/env/bin/python",
+            "cwd": "${workspaceFolder}/sites",
+            "env": {
+                "DEV_SERVER": "1"
+            },
+            "justMyCode": false
+        },
+    ],
+    "inputs": [
+        {
+          "type": "pickString",
+          "id": "site",
+          "description": "Which site?",
+          "options": [
+            "erpnext-dev",
+          ],
+          "default": "erpnext-dev"
+        },
+        {
+            "type": "pickString",
+            "id": "test",
+            "description": "Dotted path to test module (file)",
+            "options": [
+                // "frappe.tests.test_modules",
+            ],
+        },
+        {
+            "type": "pickString",
+            "id": "patch",
+            "description": "Dotted path to patch (file)",
+            "options": [
+                // "frappe.patches.v15_0.validate_newsletter_recipients"
+            ],
+        },
+        {
+            "type": "pickString",
+            "id": "app",
+            "description": "Which app?",
+            "options": [
+                "frappe",
+                "erpnext",
+                "hrms",
+            ],
+        }
+    ]
+}

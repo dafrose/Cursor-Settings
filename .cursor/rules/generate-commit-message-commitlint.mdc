@@ -1,0 +1,8 @@
+---
+description: Enforce commitlint when drafting commit messages
+alwaysApply: true
+---
+
+Draft commit subjects as Conventional Commits that pass commitlint (`<type>[scope]: <description>`).
+
+Details: read skill **`alyf-commit-messages`**.

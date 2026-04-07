@@ -1,0 +1,21 @@
+{
+	// See https://go.microsoft.com/fwlink/?LinkId=827846 to learn about workspace recommendations.
+	// Extension identifier format: ${publisher}.${name}. Example: vscode.csharp
+
+	// List of extensions which should be recommended for users of this workspace.
+	"recommendations": [
+		// "appulate.filewatcher", // Spaces -> Tabs
+		"netchampfaris.frappe-intellisense", // Auto-complete for frappe framework
+		"ms-python.python", // Linting, debugging, intellisense, code formatting, refactoring, unit tests, snippets, and more.
+		"ms-python.black-formatter", // Python code formatter
+		"ms-python.isort", // Python import sort
+		"ms-python.flake8", // Python linting
+		"esbenp.prettier-vscode", // Format JS, HTML and CSS
+		"sourcery.sourcery", // python: automatic reviews and suggested refactors
+		"samuelcolvin.jinjahtml", // Jinja HTML syntax highlighting
+		"GitHub.copilot", // AI pair programmer
+		"mechatroner.rainbow-csv" // CSV syntax highlighting
+	],
+	// List of extensions recommended by VS Code that should not be recommended for users of this workspace.
+	"unwantedRecommendations": []
+}

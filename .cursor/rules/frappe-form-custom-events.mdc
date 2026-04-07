@@ -1,0 +1,9 @@
+---
+description: Frappe form scripts — custom events and frm.trigger instead of standalone helpers
+globs: "**/doctype/**/*.js"
+alwaysApply: false
+---
+
+Share form logic via custom events on the parent DocType and `frm.trigger(...)`, not standalone file-level helpers.
+
+Details: read skill **`frappe-form-custom-events`**.

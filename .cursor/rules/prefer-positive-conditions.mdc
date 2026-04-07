@@ -1,0 +1,8 @@
+---
+description: Prefer positive if-conditions; avoid early "return if not" when a positive branch is clearer
+alwaysApply: true
+---
+
+Put the main path inside a positive `if (ready) { … }`, not an early `if (!ready) return`, when both forms are equally clear.
+
+Details: read skill **`prefer-positive-conditions`**.
