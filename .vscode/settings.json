@@ -37,8 +37,9 @@
     },
     "[python]": {
         "editor.defaultFormatter": "charliermarsh.ruff",
-        "editor.detectIndentation": true,
-        "editor.insertSpaces": false,
+        "editor.detectIndentation": false,
+        "editor.insertSpaces": true,
+        "editor.tabSize": 4,
         "editor.formatOnPaste": false,
         "editor.formatOnSave": false
     },
