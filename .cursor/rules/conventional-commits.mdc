@@ -1,0 +1,41 @@
+---
+description: Use Conventional Commits for all commit messages and PR titles
+alwaysApply: true
+---
+
+# Conventional Commits
+
+Use the [Conventional Commits](https://www.conventionalcommits.org/) format for **every** commit message, suggested PR title, and changelog-style summaries.
+
+## Format
+
+```
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+- **type** (required): `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`, or another agreed project type.
+- **scope** (optional): lowercase, short area (e.g. `rentals`, `ride_booking`, `www`).
+- **description** (required): imperative mood, lowercase, no trailing period — e.g. `add ride booking validation`, not `Added…` or `adds…`.
+
+## Breaking changes
+
+- Append `!` after the type/scope for a breaking change: `feat(api)!: remove legacy booking endpoint`
+- Or use a footer: `BREAKING CHANGE: <explanation>`
+
+## Examples
+
+```
+feat(rentals): add vehicle list web route
+fix(ride_booking): correct total when distance is zero
+docs: explain bench new web page command
+chore: bump eslint in devDependencies
+```
+
+## What to avoid
+
+- Vague one-word subjects (`fix`, `update`, `wip`) without a type and clear description.
+- Mixed styles (sentence case subject lines, trailing periods on the subject line).
