@@ -1,0 +1,31 @@
+---
+description: Frappe form scripts — custom events and frm.trigger instead of standalone helpers
+globs: "**/doctype/**/*.js"
+alwaysApply: false
+---
+
+# Frappe client scripts: custom form events
+
+When sharing logic between the main DocType form and child-table handlers (or between several parent field hooks), **prefer custom events** registered on the parent DocType over top-level standalone functions.
+
+1. Register a named handler on the main form with `frappe.ui.form.on("Parent DocType", { ... })`. The key does **not** need to match a DocField — any string works (e.g. `update_total_amount`).
+2. Invoke it with `frm.trigger("event_name")` from parent field hooks, child table hooks, or other code that has the parent `frm`.
+
+```javascript
+frappe.ui.form.on("Ride Booking", {
+	update_total_amount(frm) {
+		// shared logic
+	},
+	rate(frm) {
+		frm.trigger("update_total_amount");
+	},
+});
+
+frappe.ui.form.on("Ride Booking Item", {
+	distance(frm) {
+		frm.trigger("update_total_amount");
+	},
+});
+```
+
+Use standalone file-level functions only when the logic is not naturally owned by the form controller (e.g. pure utilities with no `frm`).
