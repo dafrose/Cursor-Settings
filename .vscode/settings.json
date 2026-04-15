@@ -37,12 +37,16 @@
     },
     "[python]": {
         "editor.defaultFormatter": "charliermarsh.ruff",
-        "editor.detectIndentation": false,
-        "editor.insertSpaces": true,
+        "editor.detectIndentation": true,
+        "editor.insertSpaces": false,
         "editor.tabSize": 4,
         "editor.formatOnPaste": false,
         "editor.formatOnSave": false
     },
+    "python.linting.pycodestyleEnabled": true,
+    "python.linting.pycodestyleArgs": [
+        "--ignore=W191"
+    ],
     "files.exclude": {
         "**/templates/includes/*.js": {
             "javascript.validate.enable": true
