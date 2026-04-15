@@ -36,17 +36,14 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[python]": {
-        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.defaultFormatter": "ms-python.black-formatter",
         "editor.detectIndentation": true,
         "editor.insertSpaces": false,
         "editor.tabSize": 4,
         "editor.formatOnPaste": false,
         "editor.formatOnSave": false
     },
-    "python.linting.pycodestyleEnabled": true,
-    "python.linting.pycodestyleArgs": [
-        "--ignore=W191"
-    ],
+    "flake8.args": ["--ignore=W191,E101"],
     "files.exclude": {
         "**/templates/includes/*.js": {
             "javascript.validate.enable": true
