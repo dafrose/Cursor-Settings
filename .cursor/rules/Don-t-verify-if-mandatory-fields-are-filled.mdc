@@ -1,0 +1,5 @@
+---
+alwaysApply: true
+---
+
+If you load data from a mandatory field in another doctype, do not verify whether it has a value. Assume that it does and use it.
