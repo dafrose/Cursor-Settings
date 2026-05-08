@@ -3,7 +3,7 @@ Fetch a Frappe app into this bench using `bench get-app`.
 **Always** determine the correct `--branch` by reading the currently checked-out branch of the `frappe` app:
 
 ```bash
-git -C /Users/daniel/frappe/bench16/apps/frappe branch --show-current
+git -C <bench-root>/apps/frappe branch --show-current
 ```
 
 Use that branch value (e.g. `version-16`) for the `--branch` flag.
@@ -28,5 +28,5 @@ Use that branch value (e.g. `version-16`) for the `--branch` flag.
 
 3. Confirm success by listing the apps directory:
    ```bash
-   ls /Users/daniel/frappe/bench16/apps/
+ls <bench-root>/apps/
    ```
