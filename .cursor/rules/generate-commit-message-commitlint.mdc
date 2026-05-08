@@ -1,0 +1,26 @@
+---
+description: Enforce commitlint when drafting commit messages
+alwaysApply: true
+---
+
+# Commitlint for generated commit messages
+
+When drafting any git commit message, including via "Generate Commit Message", ensure the subject line passes commitlint.
+
+Required subject format:
+
+`<type>[optional scope]: <description>`
+
+Rules to enforce:
+
+- Use a valid conventional type (for example: `feat`, `fix`, `docs`, `refactor`, `test`, `ci`, `chore`).
+- Keep `scope` lowercase when used.
+- Write `description` in imperative lowercase.
+- Do not end the subject with a period.
+- Use exactly one `: ` separator between header and description.
+
+Self-check before finalizing:
+
+1. Header matches conventional commit syntax.
+2. Type and scope follow repository conventions.
+3. Description is concise, lowercase, and has no trailing period.
