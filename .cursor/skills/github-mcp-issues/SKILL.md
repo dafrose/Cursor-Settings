@@ -13,6 +13,17 @@ Use **`call_mcp_tool`** with the workspace GitHub MCP server id (commonly **`use
 
 **Parameters**: use the tables in this file only—do not read MCP tool descriptor files on disk.
 
+## Pick the right MCP server first
+
+Before calling any tool, verify which GitHub MCP servers are actually available in this workspace (look at the MCP server folders Cursor lists). Don't assume `user-github` exists.
+
+- If exactly one GitHub MCP server is available, use it.
+- If **more than one** is available (e.g. one per identity/org such as `user-github-<org>` and `user-github-<personal>`), do not guess: use the **AskQuestion** tool to let the user pick the server whose token can access the target `owner/repo`.
+- If the user already named the server in the request, trust that and skip the question.
+- Stick with the chosen server id for the rest of the task.
+
+Same rule applies to the sibling **`github-mcp-pull-requests`** skill.
+
 ## Resolve `owner` and `repo`
 
 - Prefer `git remote get-url origin` and parse `github.com/<owner>/<repo>.git` (strip `.git`).

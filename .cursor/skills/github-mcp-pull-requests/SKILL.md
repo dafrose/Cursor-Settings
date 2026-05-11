@@ -11,6 +11,19 @@ description: >-
 
 Use **`call_mcp_tool`** with the workspace GitHub MCP server id (commonly **`user-github`**; the IDE may label it **github**). If a call fails with "unknown tool" or invalid arguments, the server id or tool surface changed—use the name Cursor lists for the GitHub MCP server.
 
+## Pick the right MCP server first
+
+Before calling any tool, verify which GitHub MCP servers are actually wired up in this workspace and pick the one whose authentication matches the target repo. Don't assume `user-github` exists.
+
+1. Inspect the MCP servers Cursor lists for this workspace (the descriptor folders under `<workspace-mcps>/<server-id>/tools/`). Common patterns:
+   - A single `user-github` (or `github`) server — use it directly.
+   - Multiple GitHub servers scoped per identity/org, e.g. `user-github-<org>` and `user-github-<personal>` — pick the one whose token can access the target `owner/repo`.
+2. **If more than one GitHub MCP server is available, do not guess.** Use the **AskQuestion** tool to ask the user which server to call, listing each candidate as an option (one option per server id, plus a "use a different one" escape hatch when relevant).
+3. If the user already named the server in their request (e.g. "use the alyf MCP"), trust that and skip the question.
+4. Persist the chosen server id for the rest of the task — every `call_mcp_tool` invocation in the same workflow should target the same server unless the user changes it.
+
+The same rule applies to the sibling **`github-mcp-issues`** skill: verify available servers, ask if ambiguous.
+
 ## Resolve `owner` and `repo`
 
 1. Run `git remote get-url origin` in the relevant clone and parse `github.com/<owner>/<repo>` (strip `.git` and optional trailing `/`).
