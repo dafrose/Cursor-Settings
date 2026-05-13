@@ -127,5 +127,6 @@ If project rules forbid hand-editing exported **`*.json`** for core DocTypes, ad
 
 ## Related
 
+- For **which DB/ORM APIs enforce permissions by default** (tables): see **frappe-db-permissions** (`Reference: database APIs vs default permission checks`).
 - For tests: see **frappe-testing** (`frappe.set_user`, fixtures, isolation).
 - For background work that touches docs as a real user: ensure the job user has the same permission model you tested interactively.
