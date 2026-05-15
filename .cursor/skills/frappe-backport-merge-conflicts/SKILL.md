@@ -346,6 +346,41 @@ python3 "$WORKSPACE/.cursor/scripts/po_branch_maps.py" clean --out-dir .po-branc
 
 Do not commit `.po-branch-maps-tmp/`. If the directory was already removed, `clean` is a no-op.
 
+### 3.4.2 Final gettext pass (format normalization)
+
+**polib** saves and hand edits often disagree with **Babel**/gettext line-wrapping and reference comments. After **`replay`** or manual §3.4 edits—and **before** treating locale as final—run **`bench generate-pot-file`** and **`bench update-po-files`** once more so catalogs match the toolchain layout.
+
+```bash
+cd "<bench-root>"
+bench generate-pot-file --app <app>
+bench update-po-files --app <app> --locale <locale>   # repeat per locale
+```
+
+Re-run **`bench compile-po-to-mo`** per locale after this pass so **`.mo`** matches the normalized **`.po`**.
+
+### 3.4.3 Verify idempotent gettext (no meaningful churn)
+
+Run **`bench generate-pot-file`** and each **`update-po-files`** **one more time** (identical to §3.4.2, with no edits in between). **Catalog bytes must not change** on that repeat: otherwise gettext output is unstable and you should fix the cause before committing.
+
+Practical check: hash **all** **`main.pot`** and **`*.po`**, run one full **`generate-pot-file`** + every **`update-po-files`**, hash again:
+
+```bash
+L="<bench>/apps/<app>/<app>/locale"
+shasum -a 256 "$L/main.pot" "$L"/*.po > /tmp/po-sha-before
+cd "<bench-root>"
+bench generate-pot-file --app <app>
+bench update-po-files --app <app> --locale de   # every locale with a .po
+# …
+shasum -a 256 "$L/main.pot" "$L"/*.po > /tmp/po-sha-after
+diff /tmp/po-sha-before /tmp/po-sha-after   # must print nothing
+```
+
+If **`diff`** reports a change, investigate (environment drift, odd **`.po`** layout, duplicate **`msgid`s**, etc.).
+
+**`git diff`** against **HEAD** is still useful to review the accumulated locale change before commit, but it does **not** prove idempotency; the checksum comparison does.
+
+If the only deltas are benign header timestamps and your team allows it, **AskQuestion**; otherwise treat non‑idempotent repeats as a blocker until resolved.
+
 ### 3.5 Legitimate msgid removals
 
 Compare to `upstream/<target>`, not corrupt PR `HEAD`. Removals are OK for corrupt POT, ERPNext dedup via ignore hook, or real code removal on target.
@@ -353,6 +388,8 @@ Compare to `upstream/<target>`, not corrupt PR `HEAD`. Removals are OK for corru
 **AskQuestion** if a removed msgid is app-specific (not in Frappe/ERPNext POT) and still has a live `_()` / DocType label in source.
 
 ### 3.6 Finish merge
+
+Only after §3.4.3 **checksum idempotency** passes (and **`compile-po-to-mo`** is up to date), or an agreed exception:
 
 ```bash
 git add <app>/locale/ <app>/hooks.py
@@ -368,10 +405,11 @@ git merge --continue
 ```bash
 git grep -n '<<<<<<<' || echo "OK"
 python3 -m json.tool <touched-doctype>.json > /dev/null
+# Re-run §3.4.3 shasum diff (generate-pot-file + update-po-files twice, no byte change)
 cd "<bench-root>" && bench run-tests --app <app> --module <module>
 ```
 
-Report: confirmed bench path; **confirmed branches** for frappe / erpnext / app; fixes; locale counts; `main.pot` diff vs `upstream/<target>`.
+Report: confirmed bench path; **confirmed branches** for frappe / erpnext / app; fixes; **§3.4.3 idempotent gettext** ok; locale counts; `main.pot` sanity vs `upstream/<target>`.
 
 ---
 
@@ -391,6 +429,7 @@ Report: confirmed bench path; **confirmed branches** for frappe / erpnext / app;
 | `source-ref` / `target-ref` during merge | `HEAD` + `MERGE_HEAD` vs branch names? |
 | Locale file still conflicted on disk | `build --discover-conflicts` / `--conflict-po` + `--pr-maps-first-side`? |
 | Regen + replay automation | Run `po_branch_maps.py replay` **with** bench `env/bin/python`; **`polib`** per §3.3.1; **`--prefer base`** (default) vs **`--prefer incoming`** |
+| After replay / hand edits | §3.4.2 final gettext + **`compile-po-to-mo`**, then §3.4.3 **checksum** idempotency (repeat gettext must not change **`.po`** / **`main.pot`** bytes)? |
 
 ---
 
@@ -405,6 +444,7 @@ Report: confirmed bench path; **confirmed branches** for frappe / erpnext / app;
 - **Rephrasing** `msgstr` for **`msgid`s from the original feature merge** (`develop`) instead of **byte-identical parity** with **`<develop-feature-sha>`**, or validating parity only against **latest `develop` HEAD**
 - Passing **`--source-ref`** a commit whose **committed** `*.po` / JSON still contains **`<<<<<<<`** — use **`build --conflict-po`** on a checked-out file, or **`git show <good-sha>`**, or repair the commit first
 - Defaulting to **`try/except ImportError`** around Frappe imports on hotfix when **Principle 8** above applies — prefer **dropping the import** and a **local `_…` helper** (branch-specific is OK)
+- Skipping **§3.4.2–3.4.3** and committing locale churn from **polib** vs Babel or unstable gettext (repeat **`generate-pot-file`** / **`update-po-files`** should not change **`git diff`**)
 
 ---
 
