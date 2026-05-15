@@ -1,0 +1,47 @@
+# Fixture PO with git-style conflict markers for po_branch_maps tests.
+# Do not use as a real locale file.
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. Non-conflicted string (common prefix — same on both sides after split)
+#: fixture.py:1
+msgid "Unchanged label"
+msgstr "Unverändert"
+
+#. Same wording on both sides of the conflict (no ambiguity when replaying)
+#: fixture.py:2
+msgid "Agreed label"
+<<<<<<< HEAD
+msgstr "Einvernehmlich A"
+=======
+msgstr "Einvernehmlich A"
+>>>>>>> incoming/branch
+
+#. Different translations — ambiguous on replay unless human picks --prefer
+#: fixture.py:3
+msgid "Disputed label"
+<<<<<<< HEAD
+msgstr "Basis-Formulierung"
+=======
+msgstr "Anlieferungs-Formulierung"
+>>>>>>> incoming/branch
+
+#. Only on "first" (HEAD) side in the conflict — incoming side missing this pair in hunk
+#: fixture.py:4
+msgid "Head-only extra"
+<<<<<<< HEAD
+msgstr "Nur in HEAD"
+=======
+msgstr ""
+>>>>>>> incoming/branch
+
+#. Only on incoming (second) side — HEAD has empty msgstr in hunk
+#: fixture.py:5
+msgid "Incoming-only extra"
+<<<<<<< HEAD
+msgstr ""
+=======
+msgstr "Nur in incoming"
+>>>>>>> incoming/branch

@@ -10,3 +10,5 @@
 !.vscode/**
 !.cursor/
 !.cursor/**
+.cursor/**/__pycache__/
+.cursor/**/*.py[cod]
